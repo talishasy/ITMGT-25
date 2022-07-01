@@ -26,6 +26,7 @@ def shift_letter(letter, shift):
     '''
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
+   
     import string
     import math
     alphabet_string = string.ascii_uppercase
@@ -34,7 +35,7 @@ def shift_letter(letter, shift):
     if (letter in alphabet_list):
         return alphabet_list[alphabet_list.index(letter) + shift - (26 * (math.floor((alphabet_list.index(letter) + shift) / 26)))]
     elif letter == " " :
-        print('" "')
+        return letter
     else:
         return (str(letter))
 
@@ -56,7 +57,6 @@ def caesar_cipher(message, shift):
     '''
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
 
     import string
 
@@ -66,7 +66,7 @@ def caesar_cipher(message, shift):
 
     final_message = message.translate(table)
 
-    print(final_message)
+    return (final_message)
 
 def shift_by_letter(letter, letter_shift):
     '''Shift By Letter. 
@@ -93,7 +93,7 @@ def shift_by_letter(letter, letter_shift):
     '''
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    
     import string
     import math
     alphabet_string = string.ascii_uppercase
@@ -102,7 +102,7 @@ def shift_by_letter(letter, letter_shift):
     if (letter in alphabet_list):
         return alphabet_list[alphabet_list.index(letter) + alphabet_list.index(letter_shift) - (26 * (math.floor((alphabet_list.index(letter) + alphabet_list.index(letter_shift))/26)))]
     elif letter == " " :
-        print('" "')
+        return letter
     else:
         return (str(letter))
 
@@ -236,7 +236,31 @@ def scytale_decipher(message, shift):
         the decoded message
     '''
     # Replace `pass` with your code. 
-    # Stay within the function. Only use the parameters as input. The function should return your answer.
+    # Stay within the function. Only use the parameters as input. The function should return your answer. 
     
+    def scytale_cipher(message, shift):
+
+        if len(message) % shift == 0:
+            length = len(message)
+            columns = length // shift
+            output = [''] * length
+            for i in range(length):
+                element_one = i // columns
+                element_two = i % columns
+                output[element_two * shift + element_one] = message[i]
+            return "".join(output)
+        else:
+            underscore = '_'
+            solving = shift - (len(message) % shift)
+            new_word = message + ''.join([char * solving for char in underscore])
+            length = len(new_word)
+            columns = length // shift
+            output = ['-'] * length
+            for i in range(length):
+                element_one = i // columns
+                element_two = i % columns
+                output[element_two * shift + element_one] = new_word[i]
+            return "".join(output)
+
     len(message) % shift == 0
-    return scytale_cipher(len(message) // shift, message)
+    return scytale_cipher(message, len(message) // shift)
