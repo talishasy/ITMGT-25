@@ -46,7 +46,7 @@ def relationship_status(from_member, to_member, social_graph):
             return "follower"
     else:
         if from_member in social_graph[to_member]["following"]:
-            return "followed"
+            return "followed by"
         else:
             return "no relationship"
 
@@ -161,7 +161,7 @@ def tic_tac_toe(board):
                     return 'X'
                 else:
                     if ll_ur == ['O','O','O','O','O','O']:
-                        return '6O'
+                        return 'O'
                     elif ll_ur == ['X','X','X','X','X','X']:
                         return 'X'
                     else:
@@ -195,4 +195,32 @@ def eta(first_stop, second_stop, route_map):
     '''
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    
+    in_between = len(route_map)
+    stops = list(route_map.keys())
+    first = 0
+    second = 0
+    time = 0
+    
+    for i in range(in_between):
+        if first_stop == stops[i][0]:
+            first = i 
+            
+    for i in range(in_between):
+        if second_stop == stops[i][1]:
+            second = i
+    
+    if first <= second:
+        for j in range(in_between):
+            if j >= first and j <= second:
+                if (first < second or first == second):
+                    new_dict = route_map[stops[j]]
+                    time += new_dict['travel_time_mins']
+                    
+    if first > second:
+        for k in range(in_between):
+            if k <= second or k >= first:
+                new_dict = route_map[stops[k]]
+                time += new_dict['travel_time_mins']
+                
+    return(time)
